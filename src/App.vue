@@ -2,7 +2,7 @@
   <div id="app">
       <div class="app-head">
         <div class="app-head-inner">
-          <img src="./assets/logo.png" alt="">
+          <img src="./assets/logo.png" alt="" class="img1">
           <div class="head-nav">
             <ul class='nav-list'>
               <li>登录</li>
@@ -108,7 +108,7 @@ body {
   float: left;
   margin-top: 20px;
 }
- img {
+ .img1 {
    float:left;
   width: 50px;
   margin-top:20px;
