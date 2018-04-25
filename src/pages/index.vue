@@ -12,8 +12,8 @@
                     <div  v-if ="!product.last" class="hr"></div>
                  </div>  
                  <h2>最新消息</h2>
-                 <ul v-for="news in newsList">
-                    <li>{{news}}</li>
+                 <ul v-for="(news,index) in newsList">
+                    <li>{{news.title}}</li>
                  </ul>
             </div>
         </div>
@@ -42,6 +42,7 @@
 <script>
 import  axios from 'axios'
 import slideShow from './slideshow'
+import mock from '../mockjs/mock.js'
     export default {
         components:{
             slideShow
@@ -154,7 +155,8 @@ import slideShow from './slideshow'
         mounted(){
             axios.get("api/getNewsList")
              .then((res) => {
-            this.newsList = res.data
+            this.newsList = res.data.list
+            console.log(res.data)
             }, (err) => {
             console.log(err)
     })

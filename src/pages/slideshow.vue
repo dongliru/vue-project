@@ -6,7 +6,10 @@
                 <div class="slide-img">
                     <a :href="slides[nowIndex].href">
                       <transition name="slide-trans">
-                        <img :src="slides[nowIndex].src">
+                        <img v-if="isShow" :src="slides[nowIndex].src">
+                      </transition>
+                      <transition name="slide-trans-old">
+                        <img v-if="!isShow" :src="slides[nowIndex].src">
                       </transition>
                     </a>
                 </div>
@@ -30,6 +33,7 @@
     export default {
         data(){
           return {
+            isShow:true,
             nowIndex: 0,
             intvTime:1000,
             interval:"",
@@ -41,24 +45,24 @@
             default: []
         }},
         methods:{
-          goto(index){
-            // this.nowIndex = index;
-            var _this = this;
-            this.interval = setInterval(function(){
-              if(_this.nowIndex==_this.slides.length-1){
-                _this.nowIndex =0;
-              }else {
-                _this.nowIndex++;
-              }
-            },1000)
-            // console.log(this.slides.length); //???? 在方法里都能获取到slides，但是报错Cannot read property 'length' of undefined
+            goto (index) {
+              this.isShow = false
+              setTimeout(() => {
+                this.isShow = true
+                this.nowIndex = index
+              }, 10)
+            },
+          runInv(){
+             this.invId = setInterval(() => {
+              this.goto(this.nextIndex)
+            }, this.intvTime)
           },
           clearInter(){
             clearInterval(this.interval);
           }
         },
         mounted(){
-          this.goto(this.nowIndex);
+          this.runInv(this.nowIndex);
         },
         computed:{
           prevIndex(){
@@ -81,23 +85,15 @@
 </script>
 <style>
 .slide-trans-enter-active {
- transition: all 1s ease;
- transform: translateX(0)
+  transition: all .5s;
 }
-
-.slide-trans-leave-active {
- transition: all 1s ease;
- transform: translateX(-100%)
-}
-
 .slide-trans-enter {
- transform: translateX(100%)
+  transform: translateX(900px);
 }
-
-.slide-trans-leave {
- transform: translateX(0)
+.slide-trans-old-leave-active {
+  transition: all .5s;
+  transform: translateX(-900px);
 }
-
 
 .slide-show {
   position: relative;

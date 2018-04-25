@@ -5,7 +5,7 @@
           <img src="./assets/logo.png" alt="" class="img1">
           <div class="head-nav">
             <ul class='nav-list'>
-              <li>登录</li>
+              <el-button type="text" @click="open">登录</el-button>
               <li class="nav-pile">|</li>
               <li>注册</li>
               <li class="nav-pile">|</li>
@@ -27,12 +27,33 @@
 </template>
 
 <script>
+import elementUI from 'element-ui'
 export default {
   name: 'App',
   data(){
     return {
       msg:"欢迎来到你的vue项目"
     }
+  },
+  methods:{
+    open() {
+        this.$prompt('请输入邮箱', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+          inputErrorMessage: '邮箱格式不正确'
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: '你的邮箱是: ' + value
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });       
+        });
+      }
   }
 }
 </script>

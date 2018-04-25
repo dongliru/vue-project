@@ -4,9 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import indexPage from './pages/index.vue'
+import elementUI from 'element-ui'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(elementUI)
 var  router =new VueRouter({
     // mode:"history",
     routes:[
