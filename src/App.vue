@@ -50,13 +50,13 @@ export default {
           ]),
           showCancelButton: true,
           confirmButtonText: '登录',
-          cancelButtonText: '取消',
+          cancelButtonText: '取消',  // 这里怎么实现弹框的复用 ？？？
         })
     },
     open5() {
         this.$alert('<div>请输入邮箱：<input type="text" style="outline:none;width:70%;border-radius:3px;height:20px;border:1px solid #848689;padding-left:5px"><br>请输入密码：<input type="password" style="outline:none;width:70%;border-radius:3px;height:20px;border:1px solid #848689;padding-left:5px"><br>请确认密码：<input type="password" style="outline:none;width:70%;border-radius:3px;height:20px;border:1px solid #848689;padding-left:5px"></div>', '请您注册', {
           dangerouslyUseHTMLString: true,
-          confirmButtonText: '注册',
+          confirmButtonText: '注册', // 这里怎么实现两个按钮呢 ？？？
         });
       },
        open2() {
@@ -70,9 +70,9 @@ export default {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: '邮箱格式不正确'
-        })
-      }
+          inputErrorMessage: '邮箱格式不正确' // 这里怎么实现多个输入框？？？
+      })
+       }
 }
 }
 </script>
