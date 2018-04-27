@@ -6,7 +6,7 @@
                  <div v-for="product in productList">
                     <h3>{{ product.title}}</h3>
                     <ul v-for="item in product.list">
-                         <a :href="item.url">{{ item.name }}</a>
+                           <router-link v-bind:to='"detail/"+ item.otherName'   :href="item.url">{{ item.name }}</router-link>
                           <span v-if="item.hot" class="hot-tag">HOT</span>
                     </ul>
                     <div  v-if ="!product.last" class="hr"></div>
@@ -19,8 +19,6 @@
         </div>
         <div class="index-right">
        <slide-show :slides="slides">
-            
-            
        </slide-show>
 
       <div class="index-board-list">
@@ -31,7 +29,7 @@
             <h2>{{ item.title }}</h2>
             <p>{{ item.description }}</p>
             <div class="index-board-button">
-              <router-link class="button" :to="{path: 'detail/' + item.toKey}">立即购买</router-link>
+              <router-link class="button" :to="item.toKey">立即购买</router-link>
             </div>  
             </div>
         </div>
@@ -77,7 +75,7 @@ import mock from '../mockjs/mock.js'
                     title: '开放产品',
                     description: '开放产品是一款开放产品',
                     id: 'car',
-                    toKey: 'analysis',
+                    toKey: 'analysic',
                     saleout: false
                     },
                     {
@@ -109,19 +107,23 @@ import mock from '../mockjs/mock.js'
                     list: [
                         {
                         name: '数据统计',
+                        otherName:"statistics",
                         url: 'http://starcraft.com'
                         },
                         {
                         name: '数据预测',
+                        otherName:"forecast",
                         url: 'http://warcraft.com'
                         },
                         {
                         name: '流量分析',
+                        otherName:"analysic",
                         url: 'http://overwatch.com',
                         hot: true
                         },
                         {
                         name: '广告发布',
+                        otherName:"advertising",
                         url: 'http://hearstone.com'
                         }
                     ]
@@ -132,19 +134,23 @@ import mock from '../mockjs/mock.js'
                     list: [
                         {
                         name: '91助手',
+                        otherName:"statistics",
                         url: 'http://weixin.com'
                         },
                         {
                         name: '产品助手',
+                        otherName:"statistics",
                         url: 'http://twitter.com',
                         hot: true
                         },
                         {
                         name: '智能地图',
+                        otherName:"statistics",
                         url: 'http://maps.com'
                         },
                         {
                         name: '团队语音',
+                        otherName:"statistics",
                         url: 'http://phone.com'
                         }
                     ]

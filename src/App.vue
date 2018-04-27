@@ -5,9 +5,40 @@
           <img src="./assets/logo.png" alt="" class="img1">
           <div class="head-nav">
             <ul class='nav-list'>
-              <li  @click="open">登录</li>
+
+              <li type="text" @click="login = true">登录</li>
+              <el-dialog
+                title="请您登录"
+                :visible.sync="login"
+                width="30%"
+                center>
+                <div class='login'>
+                  请输入邮箱：<input type="text"><br>
+                  请输入密码：<input type="password"><br>
+                </div>
+                <span slot="footer" class="dialog-footer">
+                  <el-button @click="login = false">取 消</el-button>
+                  <el-button type="primary" @click="login = false">登录</el-button>
+                </span>
+              </el-dialog>
               <li class="nav-pile">|</li>
-              <li @click="open2">注册</li>
+              <li type="text" @click="centerDialogVisible = true">注册</li>
+
+              <el-dialog
+                title="请您注册"
+                :visible.sync="centerDialogVisible"
+                width="30%"
+                center>
+                <div class='register'>
+                  请输入邮箱：<input type="text"><br>
+                  请输入密码：<input type="password"><br>
+                  请确认密码：<input type="password"><br>
+                </div>
+                <span slot="footer" class="dialog-footer">
+                  <el-button @click="centerDialogVisible = false">取 消</el-button>
+                  <el-button type="primary" @click="centerDialogVisible = false">注册</el-button>
+                </span>
+              </el-dialog>
               <li class="nav-pile">|</li>
               <li>关于</li>
             </ul>
@@ -32,49 +63,17 @@ export default {
   name: 'App',
   data(){
     return {
-      h:""
+      h:"",
+      centerDialogVisible: false,
+      login:false
     }
   },
   methods:{
-    open() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '请您登录',
-          message: h('div', null, [
-            h('span', null, '请输入账号 '),
-            h('input', {style:'outline:none;width:70%;border-radius:3px;height:20px;border:1px solid #848689;padding-left:5px'}, ' '),
-            h('br',null,''),
-            h('br',null,''),
-            h('span', null, '请输入密码 '),
-             h('input', {style:'outline:none;width:70%;border-radius:3px;height:20px;border:1px solid #848689;padding-left:5px'}, ' '),
-          ]),
-          showCancelButton: true,
-          confirmButtonText: '登录',
-          cancelButtonText: '取消',  // 这里怎么实现弹框的复用 ？？？
-        })
-    },
-    open5() {
-        this.$alert('<div>请输入邮箱：<input type="text" style="outline:none;width:70%;border-radius:3px;height:20px;border:1px solid #848689;padding-left:5px"><br>请输入密码：<input type="password" style="outline:none;width:70%;border-radius:3px;height:20px;border:1px solid #848689;padding-left:5px"><br>请确认密码：<input type="password" style="outline:none;width:70%;border-radius:3px;height:20px;border:1px solid #848689;padding-left:5px"></div>', '请您注册', {
-          dangerouslyUseHTMLString: true,
-          confirmButtonText: '注册', // 这里怎么实现两个按钮呢 ？？？
-        });
-      },
-       open2() {
-        this.$prompt('请输入邮箱', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: '邮箱格式不正确'
-        }),
-        this.$prompt('请输入邮箱', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: '邮箱格式不正确' // 这里怎么实现多个输入框？？？
-      })
+    
+   
        }
 }
-}
+
 </script>
 
 <style>
@@ -178,6 +177,20 @@ body {
 .container {
   width: 1200px;
   margin: 0 auto;
+}
+.register input,.login input{
+  width:75%;
+  margin:10px 0;
+  height:30px;
+  border-radius:3px;
+  border:1px solid #898989;
+
+}
+.el-dialog__header {
+  padding:0;
+}
+.el-dialog--center .el-dialog__body {
+  padding:0 25px;
 }
 .hr {
   height: 1px;
